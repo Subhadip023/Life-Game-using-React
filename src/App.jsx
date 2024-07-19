@@ -20,7 +20,6 @@ function App() {
   const [grid, setGrid] = useState(emptyGrid());
 
   function toggleCell(row, col) {
-    console.log(row, col);
     const updateGrid = grid.map((rowArray, rowIndex) =>
       rowArray.map((cell, colIndex) => {
         if (row == rowIndex && col == colIndex) {
@@ -43,15 +42,22 @@ function runGame() {
         let sumOfNeighbour=0
           for (let x = i-1; x <=i+1; x++) {
             for (let y = j-1; y <= j+1; y++) {
-              sumOfNeighbour=grid[x][y];
-
+              if (x === i && y === j) continue;  
+              sumOfNeighbour+=grid[x][y];
             }
           }
         if (grid[i][j]===1) {
-          if (sumOfNeighbour>2) {
-            
+          if (sumOfNeighbour < 2 || sumOfNeighbour>3) {
+            nextGride[i][j]=0;
           }
-        }  
+          else {
+            nextGride[i][j]=1;
+          }
+        }  else{
+          if (sumOfNeighbour===3) {
+            nextGride[i][j]=1;
+          }
+        }
 
       }
 
