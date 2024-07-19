@@ -5,4 +5,80 @@
   color: aliceblue;
 }
 
+header{
+  margin: 30px auto;
+  /* background:green; */
+  height: 5vh;
+  width: 80vw;
+  font-size: 40px;
+}
 
+.Grid{
+  margin: auto;
+  background:rgb(53, 53, 52);
+  height: fit-content;
+  width: fit-content;
+  border: 5px solid rgb(77, 74, 74);
+  border-radius: 10px;
+}
+
+.btn{
+  margin: auto;
+  /* background: greenyellow; */
+  height: 10vh;
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn button {
+  font-size: 30px;
+  margin: 0 30px;
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  border: none;
+  overflow: hidden;
+  background: #000000aa;
+}
+
+.btn button:hover{
+  background: #5d5d5d;
+  color: rgb(198, 235, 235);
+}
+
+.cell{
+    
+  width:  20px;
+  height: 20px;
+
+}
+
+@media (max-width:800px) {
+  body{
+    background: white;
+    color: red;
+  }
+
+  header{
+    margin: 10px auto;
+    /* background:green; */
+    height: 5vh;
+    width: 80vw;
+    font-size: 25px;
+  }
+ .btn button{
+  font-size: 15px;
+  
+  padding: 10px;
+ }
+ .Grid{
+overflow: hidden;
+width: 95vw;
+ }
+  
+
+ 
+}

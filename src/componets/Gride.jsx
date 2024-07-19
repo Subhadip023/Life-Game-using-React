@@ -7,7 +7,7 @@ function Grid({ grid, toggleCell }) {
       className="Grid"
       style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${grid[0].length}, 20px)`,
+        gridTemplateColumns: `repeat(${grid[0].length},20px)`,
         gap: '2px',
       }}
     >

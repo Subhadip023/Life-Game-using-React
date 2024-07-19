@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Gride from "./componets/Gride";
-import "./App.css";
 
 const rows = 30;
-const cols = 30;
+const cols = 80;
 
 const emptyGrid = () => {
   let array = [];
@@ -15,9 +14,20 @@ const emptyGrid = () => {
   }
   return array;
 };
+const randomGrid = () => {
+  let array = [];
+  for (let i = 0; i < rows; i++) {
+    array[i] = [];
+    for (let j = 0; j < cols; j++) {
+      array[i][j] = Math.floor(Math.random()*2);
+    }
+  }
+  return array;
+};
 
 function App() {
   const [grid, setGrid] = useState(emptyGrid());
+  const [start,setStart]=useState(false)
 
   function toggleCell(row, col) {
     const updateGrid = grid.map((rowArray, rowIndex) =>
@@ -34,16 +44,16 @@ function App() {
 function runGame() {
   const nextGride=emptyGrid();
   const rows=grid.length;
-  const cols=grid.length;
+  const cols=grid[0].length;
   for (let i = 0; i < rows; i++) {
     for(let j=0;j<cols;j++){
-      if (i==0 || j==0 || i==rows-1 || j==cols-1) nextGride[i][j]=grid[i][j]
-      else{
+    
+   
         let sumOfNeighbour=0
           for (let x = i-1; x <=i+1; x++) {
             for (let y = j-1; y <= j+1; y++) {
               if (x === i && y === j) continue;  
-              sumOfNeighbour+=grid[x][y];
+              sumOfNeighbour+=grid[(x+rows)%rows][(y+cols)%cols];
             }
           }
         if (grid[i][j]===1) {
@@ -63,20 +73,31 @@ function runGame() {
 
     }
     
-  }
+  
   setGrid(nextGride)
 }
   
+useEffect(()=>{
+  if (start) {
+    const interval=setInterval(runGame,100)
+    return ()=>clearInterval(interval)
+  }
+}
+,[start,grid]
+)
+
 
   return (
     <>
       <section className="main-section">
-        <header>this is header</header>
+        <header>Conway's Game of life By Subhadip</header>
         <div>
           <Gride grid={grid} toggleCell={toggleCell} />
         </div>
         <div className="btn">
-          <button onClick={runGame}> run</button>
+          <button onClick={()=>setStart(!start)}> {start?'Stop':"Start"}</button>
+          <button onClick={()=>setGrid(emptyGrid)}>Reset</button>
+          <button onClick={()=>setGrid(randomGrid)}>Random</button>
         </div>
       </section>
     </>
